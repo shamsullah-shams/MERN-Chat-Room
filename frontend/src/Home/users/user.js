@@ -23,7 +23,7 @@ const Users = () => {
                     <CardHeader
                         avatar={(
                             <Avatar
-                                src={`/${singleUser.imageUrl}`}
+                                src={`http://localhost:8080/${singleUser.imageUrl}`}
                             />
                         )
                         }

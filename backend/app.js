@@ -44,7 +44,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public', 'build')));
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/backend/images', express.static(path.join(__dirname, 'images')));
 
 
 const fileSize = 2000000;

@@ -4,8 +4,10 @@ import SmallAppBar from "../UI/SmallAppBar";
 import axios from "axios";
 import AppBar from "../UI/AppBar";
 import User from "./users/user";
-import Messages from './messages/message';
 import { useStyle } from "../UI/Style";
+import List from "../UI/List";
+import { useDispatch, useSelector } from "react-redux";
+import { messagesAction } from "../store/action/message";
 
 const Home = (props) => {
     const classes = useStyle();
@@ -17,6 +19,7 @@ const Home = (props) => {
     const [pageRefresh, setPageRefresh] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [error, setError] = useState(false);
+    const [messageReq, setMessageReq] = useState(0);
 
 
     // const refreshMessages = () => {
@@ -73,7 +76,7 @@ const Home = (props) => {
 
 
     const onSubmitHandler = async (event) => {
-        event.preventDefault();
+        event.preventDefault(event);
 
         if (newMessage !== '') {
             const localStorageUser = localStorage.getItem('user');
@@ -87,7 +90,7 @@ const Home = (props) => {
             setNewMessage('');
             try {
                 const result = await axios.post('http://localhost:8080/api/newmessage', newUserMessage);
-                setChat([...chat, { message: newMessage, _id: Math.random().toString() }])
+                setMessageReq(1);
             } catch (error) {
                 setSpinner(false);
                 setErrorMessage(error.response.data.message);
@@ -100,6 +103,24 @@ const Home = (props) => {
         }
     }
 
+    // @@ for Messages 
+    // const [message, setMessage] = useState('');
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(messagesAction())
+        if (messageReq === 1) {
+            setMessageReq(0);
+        }
+    }, [messageReq]);
+
+    const messag = useSelector(state => state.messages);
+    const { messages, loading } = messag;
+    const allMessages = messages.map(ch => {
+        return (
+            <List message={ch} key={ch._id} />
+        )
+    });
 
     return (
         <>
@@ -115,7 +136,7 @@ const Home = (props) => {
                     <Grid item>
                         <Paper className={classes.paperOfHome}>
                             <div id='paperDiv' className={classes.messageDivOfHome}>
-                                <Messages />
+                                {allMessages}
                             </div>
                             <form onSubmit={onSubmitHandler} >
                                 <input placeholder='Enter your message:' className={classes.inputOfHome} value={newMessage} onChange={event => setNewMessage(event.target.value)} />

@@ -63,6 +63,7 @@ exports.postSignup = async (req, res, next) => {
                 lastName: lastName,
                 email: email,
                 password: hashpassword,
+                imageUrl: imageUrl,
             }
         );
         await user.save();

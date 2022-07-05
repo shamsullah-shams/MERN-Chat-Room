@@ -29,7 +29,7 @@ export default function AlignItemsList(props) {
             <List className={classes.root}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                        <Avatar alt="Travis Howard" src={`/${props.message.userImageUrl}`} />
+                        <Avatar alt="Travis Howard" src={`http://localhost:8080/${props.message.userImageUrl}`} />
                     </ListItemAvatar>
                     <ListItemText className={classes.ListContent}
                         primary={props.message.userName}

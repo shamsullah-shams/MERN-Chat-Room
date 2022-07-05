@@ -8,18 +8,18 @@ const Message = new Schema({
         type: String,
         required: true,
     },
-    // userName: {
-    //     type: String,
-    //     required: true
-    // },
-    // userId: {
-    //     type: mongoose.Types.ObjectId,
-    //     required: true
-    // },
-    // userImageUrl: {
-    //     type: String,
-    //     required: true,
-    // }
+    userName: {
+        type: String,
+        required: true
+    },
+    userId: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
+    userImageUrl: {
+        type: String,
+        required: true,
+    }
 }, { timestamps: true });
 
 
