@@ -96,7 +96,7 @@ app.use(authRoutes);
 
 
 
-mongoose.connect('mongodb://localhost:27017/chatApp', (error) => {
+mongoose.connect('mongodb://127.0.0.1:27017/chatApp', (error) => {
     if (error) {
         return console.log(error);
     }
