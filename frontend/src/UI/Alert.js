@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-// import Alert from '@material-ui/lab/Alert';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,8 +16,7 @@ const SimpleAlerts = (props) => {
 
     return (
         <div className={classes.root}>
-            {/* <Alert severity="error">{props.message}</Alert> */}
-            Alert
+            <Alert severity="error">{props.message}</Alert>
         </div>
     );
 }

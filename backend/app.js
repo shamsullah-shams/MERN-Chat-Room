@@ -15,7 +15,7 @@ const app = express();
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "images");
+        cb(null, "backend/images");
     },
     filename: (req, file, cb) => {
         cb(null, uuidv4() + "-" + file.originalname);
@@ -48,8 +48,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 const fileSize = 2000000;
-app.post('/api/signup', authController.postSignup);
-/*
 app.post('/api/signup',
     multer({
         storage: fileStorage,
@@ -90,7 +88,7 @@ app.post('/api/signup',
         return res.status(422).send({ message: "Attach file is large than 2mb" });
     }
 );
-*/
+
 app.use(messageRoutes);
 app.use(authRoutes);
 

@@ -2,10 +2,11 @@ import {
     makeStyles,
     Button,
 } from "@material-ui/core";
+import React from "react";
 
 const useStyle = makeStyles((theme) => ({
     buttonOFForm: {
-        marginBottom: 20,
+        marginTop: 20,
         width: '90%',
         marginLeft: 12,
         backgroundColor: "green",
@@ -16,10 +17,14 @@ const useStyle = makeStyles((theme) => ({
 const ButtonField = (props) => {
     const classes = useStyle();
     return (
-        <Button
-            className={classes.buttonOFForm}
-            variant="contained"
-        >{props.children}</Button>
+        <React.Fragment>
+            <Button
+                className={classes.buttonOFForm}
+                variant="contained"
+                onClick={props.onClick}>
+                {props.children}
+            </Button>
+        </React.Fragment>
     )
 }
 

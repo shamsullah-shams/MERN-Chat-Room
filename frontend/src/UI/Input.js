@@ -1,20 +1,24 @@
 import {
     TextField,
-    makeStyles
 } from "@material-ui/core";
+import React from "react";
 import { useStyle } from "./Style";
 
 const Input = (props) => {
     const classes = useStyle();
     return (
-        <TextField
-            required
-            id="outlined-name-required"
-            label={props.label}
-            variant="outlined"
-            className={classes.inputField}
-            type={props.type}
-        />
+        <React.Fragment>
+            <TextField
+                required
+                id="outlined-name-required"
+                label={props.label}
+                variant="outlined"
+                className={classes.inputField}
+                type={props.type}
+                value={props.value}
+                onChange={props.onChange}
+            />
+        </React.Fragment>
     )
 }
 
