@@ -4,8 +4,8 @@ const Message = require('../model/message');
 const io = require('../socket');
 
 
+// @@ ---- funciton that returns all messages to the client
 exports.getAllMessages = async (req, res, next) => {
-    console.log('req');
     try {
         const allMessages = await Message.find();
         res.send([...allMessages]);
@@ -14,9 +14,11 @@ exports.getAllMessages = async (req, res, next) => {
     }
 }
 
+// @@ ---- function that creates a new message related to a special client
 exports.createMessage = async (req, res, next) => {
     const validationError = validationResult(req);
     let error = '';
+    // @@ ---- checking validation errors
     if (!validationError.isEmpty()) {
         let counter = 0;
         validationError.array().filter(vE => {
@@ -35,7 +37,7 @@ exports.createMessage = async (req, res, next) => {
             userName: userName
         });
         const result = await newMessage.save();
-
+        // @@ ---- informing all connected users
         io.getIO().emit('messages', { action: 'newmessage', message: newMessage })
         return res.send(result);
     } catch (error) {

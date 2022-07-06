@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
-// @@ get all users to the frontend
+
+// @@ --- returns all users to the frontend
 exports.getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find();
@@ -15,13 +16,14 @@ exports.getAllUsers = async (req, res, next) => {
 }
 
 
-// @@ checks if user is Authorized
+// @@ ---- checks if user is Authorized
 exports.isAuth = (req, res, next) => {
     const { token } = req.body;
     if (!token) {
         return res.status(422).send({ message: "Not Authorized", isAuth: false });
     }
     let decodedToken
+    // @@ ---- checking jsonwebtoken 
     try {
         decodedToken = jwt.verify(token, process.env.SECRET);
     } catch (error) {
@@ -36,8 +38,9 @@ exports.isAuth = (req, res, next) => {
 
 
 
-// @@ gets all user data stores it into the database
+// @@ ---- gets all user data stores it into the database
 exports.postSignup = async (req, res, next) => {
+    // @@ ---- checking validatin errors
     const validationError = validationResult(req);
     let error = '';
     if (!validationError.isEmpty()) {
@@ -48,13 +51,13 @@ exports.postSignup = async (req, res, next) => {
         })
         return res.status(422).send({ message: error });
     }
-    console.log(req.file);
+    // @@ ---- checking user image
     if (!req.file) {
         return res.status(422).send({ message: "Attach file is not image Or file must be less than 3mb" })
     }
     const { name, lastName, email, password } = req.body;
-    console.log('req');
     try {
+        // @@ ---- creating hash password for users
         const hashpassword = bcrypt.hashSync(password, 12);
         const imageUrl = req.file.path;
         const user = new User(
@@ -67,7 +70,8 @@ exports.postSignup = async (req, res, next) => {
             }
         );
         await user.save();
-        // IO.getIO().emit('newuser', { action: "newuser", newuser: user })
+        // @@ ---- informing all connected clients about new sign up
+        IO.getIO().emit('newuser', { action: "newuser", newuser: user })
         res.status(201).json({ message: "user is added" });
 
     } catch (error) {
@@ -77,7 +81,9 @@ exports.postSignup = async (req, res, next) => {
 }
 
 
+// @@ ---- function for signing a client 
 exports.postSignin = async (req, res, next) => {
+    // @@ ---- checking validation errors
     const validationError = validationResult(req);
     let error = '';
     if (!validationError.isEmpty()) {
@@ -89,13 +95,13 @@ exports.postSignin = async (req, res, next) => {
         return res.status(422).send({ message: error });
     }
     const { email, password } = req.body;
-
-
     try {
+        // @@ ---- check if user exists on the email
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(422).send({ message: "User Not Found" });
         }
+        // @@ ---- compare passwords
         const doMatch = bcrypt.compareSync(password, user.password);
         if (doMatch) {
             const token = jwt.sign({
@@ -105,7 +111,6 @@ exports.postSignin = async (req, res, next) => {
         }
         return res.status(422).send({ message: "User Name or password is wrong" });
     } catch (error) {
-        console.log(error);
         return res.status(500).send({ message: "Server Error" });
     }
 }

@@ -13,6 +13,8 @@ const uuidv4 = require('uuid').v4;
 require('dotenv').config();
 const app = express();
 
+
+// @@ ---- identify the destination and name of up comming files
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "backend/images");
@@ -22,6 +24,7 @@ const fileStorage = multer.diskStorage({
     }
 });
 
+// @@ ---- check if file is an image
 const fileFilterr = (req, file, cb) => {
     if
         (
@@ -38,16 +41,20 @@ const fileFilterr = (req, file, cb) => {
     }
 }
 
-
+// @@ ---- TO PREVENT THE "CROSS ORIGIN RESOURCE SHARING" ERROR
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// @@ ---- To serve the public folder statically
 app.use(express.static(path.join(__dirname, 'public', 'build')));
+// @@ ---- To serve the images folder statically
 app.use('/backend/images', express.static(path.join(__dirname, 'images')));
 
-
+// @@ ---- limit the file size
 const fileSize = 2000000;
+
+// @@ ---- route for handling new sign up route checking file and data validations
 app.post('/api/signup',
     multer({
         storage: fileStorage,
@@ -89,24 +96,25 @@ app.post('/api/signup',
     }
 );
 
+
+// @@ ---- routes for messages
 app.use(messageRoutes);
+// @@ ---- routes for users
 app.use(authRoutes);
 
 
-
+// @@ ---- mongodb connection
 mongoose.connect('mongodb://127.0.0.1:27017/chatApp', (error) => {
     if (error) {
         return console.log(error);
     }
 })
 
+// @@ ---- starting the backend server
 const server = app.listen(8080, () => {
     console.log('server is running on port 8080')
 });
 
+// @@ initialization of socket.io 
 const io = require('./socket').init(server);
-
-
-io.on('connection', socket => {
-})
 

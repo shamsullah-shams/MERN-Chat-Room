@@ -18,18 +18,18 @@ const Signin = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [spinner, setSpinner] = useState(false);
 
-    // @@ Handling User Email
+    // @@ ---- Handling User Email
     const emailHandler = (event) => {
         setEmail(event.target.value)
     }
-    // @@ Handling User Password
+    // @@ ---- Handling User Password
     const passwordHandler = (event) => {
         setPassword(event.target.value);
     }
 
     const onSubmitHandler = async () => {
 
-        // @@ check if All fields are filled
+        // @@ ---- check if All fields are filled
         if (email === "" || password === "") {
             setErrorMessage('All fields are required');
             setError(true);
@@ -45,10 +45,14 @@ const Signin = () => {
             password: password,
         }
         try {
+            // @@ ---- send the user information to the backend
             const result = await axios.post('http://localhost:8080/api/user/login', user);
+            // @@ ---- store user information in local storage
             localStorage.setItem('user', JSON.stringify(result.data));
             localStorage.setItem('token', result.data.token);
+
             setSpinner(false);
+            // @@ ---- redirect to home screen
             if (result.status === 200) {
                 navigate('/');
             }

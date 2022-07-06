@@ -22,26 +22,26 @@ const Signup = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    // @@ Handling User Name
+    // @@ ---- Handling User Name
     const nameHandler = (event) => {
         setName(event.target.value);
     }
-    // @@ Handling User Last Name
+    // @@ ---- Handling User Last Name
     const lastNameHandler = (event) => {
         setLastName(event.target.value);
     }
-    // @@ Handling User Email
+    // @@ ---- Handling User Email
     const emailHandler = (event) => {
         setEmail(event.target.value);
     }
-    // @@ Handling User Password
+    // @@ ---- Handling User Password
     const passwordHandler = (event) => {
         setPassword(event.target.value);
     }
 
-    // On Submition Of Form
+    // @@ ---- On Submition Of Form
     const onSubmitHandler = async () => {
-        // @@ check if all fields are filled
+        // @@ ---- check if all fields are filled
         if (name === '' || email === '' || password === '' || lastName === '') {
             setErrorMessage("All fields are required");
             setError(true);
@@ -50,7 +50,7 @@ const Signup = () => {
             }, 5000);
             return;
         }
-        // @@ Get The Form Data and send to the backend
+        // @@ ---- Get The Form Data and send to the backend
         try {
             setSpinner(true);
             const formData = new FormData();
@@ -60,6 +60,7 @@ const Signup = () => {
             formData.append('password', password);
             formData.append('file', image);
 
+            // @@ ---- send the form data to the backend
             const result = await axios.post('http://localhost:8080/api/signup', formData);
             setSpinner(false);
             if (result.status === 201) {
