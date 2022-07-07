@@ -4,7 +4,6 @@ import usersReducer from "./reducer/user";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-
 const reducer = combineReducers({
     messages: messageReducer,
     users: usersReducer,

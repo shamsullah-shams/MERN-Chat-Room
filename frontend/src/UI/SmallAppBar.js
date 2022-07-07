@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { alpha, makeStyles } from '@material-ui/core/styles';
-// import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -67,10 +67,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
     const classes = useStyles();
 
-
-
-
-
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.header}>
@@ -80,7 +76,7 @@ export default function SearchAppBar() {
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
-                            {/* <SearchIcon /> */}
+                            <SearchIcon />
                         </div>
                         <InputBase
                             placeholder="Search…"

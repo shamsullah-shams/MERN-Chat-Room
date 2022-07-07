@@ -14,6 +14,18 @@ require('dotenv').config();
 const app = express();
 
 
+// @@ ---- TO PREVENT THE "CROSS ORIGIN RESOURCE SHARING" ERROR
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// @@ ---- To serve the public folder statically
+app.use(express.static(path.join(__dirname, 'public', 'build')));
+// @@ ---- To serve the images folder statically
+app.use('/backend/images', express.static(path.join(__dirname, 'images')));
+
+
+
 // @@ ---- identify the destination and name of up comming files
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -40,16 +52,6 @@ const fileFilterr = (req, file, cb) => {
         cb(null, false);
     }
 }
-
-// @@ ---- TO PREVENT THE "CROSS ORIGIN RESOURCE SHARING" ERROR
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-// @@ ---- To serve the public folder statically
-app.use(express.static(path.join(__dirname, 'public', 'build')));
-// @@ ---- To serve the images folder statically
-app.use('/backend/images', express.static(path.join(__dirname, 'images')));
 
 // @@ ---- limit the file size
 const fileSize = 2000000;
@@ -101,7 +103,10 @@ app.post('/api/signup',
 app.use(messageRoutes);
 // @@ ---- routes for users
 app.use(authRoutes);
-
+// @@ ---- route for serving the react.js build folder
+app.use('/', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'));
+})
 
 // @@ ---- mongodb connection
 mongoose.connect('mongodb://127.0.0.1:27017/chatApp', (error) => {

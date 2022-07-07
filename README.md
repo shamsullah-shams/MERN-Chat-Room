@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Reat Time Chat Room in MERN
+Real time Chat Appplication. This is a Simple Chat Room Where you can share a message and you can see messages of other people. You can post a new message. As soon as you post a new message that goes to all connected clients and they can see your post. Post will be related to you and Only and Only you can update or delete your Post.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## module installation
+In the root folder run 
+### `npm i`
+then cd frontend and run
+### `npm i`
 
+if there were a problem in instalation of dependencies in frontend then simply join the keyword `--legacy-peer-deps` with dependency name. As seggested below
+### `npm i socket.io-client --legacy-peer-deps`
+
+## Available Scripts or commands
 In the project directory, you can run:
-
 ### `npm start`
+to run the node.js backend server by node
+### `npm run dev`
+to run the backend server by nodemon
+### `npm run client`
+to run the react.js development server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+you can to go to the [http://localhost:8080](http://localhost:8080) to see the react build project serving by Node.js
+And you can go to the [http://localhost:3000](http://localhost:3000) the react.js project interacting with Node.js
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Features of Code
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **MongoDB Database**
+- **Express Framework**
+- **React js**
+- **State Management/Redux**
+- **Node js**
+- **MERN**
 
-### `npm run build`
+- **CORS**
+- **Compression**
+- **multer**
+- **Password Encryption**
+- **.env file**
+- **Code Structure**
+- **Reuseable Code**
+- **Routes for multiple paths**
+- **Error Handling**
+- **Socket.io**
+- **Validations**
+- **User Images**
+- **Matarial UI React Components**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features of Application
 
-### `npm run eject`
+- **Authentication In Frontend**
+- **Complete Authorization**
+- **Displaying All Users**
+- **Displaying All Message**
+- **Creating New Messages**
+- **Deleting user Related Messages**
+- **Editing User Related Messages**
+- **Log out in Frontend**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+ MIT

@@ -11,20 +11,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { messagesAction } from "../store/action/message";
 import { useNavigate } from 'react-router';
 import Spinner from '../UI/Spinner/Spinner';
-import Alert from "../UI/Alert"
+import Alert from "../UI/Alert";
 
 
 const Home = (props) => {
-    const classes = useStyle();
     const [spacing, setSpacing] = React.useState(2);
     const [newMessage, setNewMessage] = useState('');
     const [spinner, setSpinner] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [error, setError] = useState(false);
     const [req, setReq] = useState(0);
-    const navigate = useNavigate();
     const [componentRefresh, setComponentRefresh] = useState(0);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [updateValue, setUpdateValue] = useState('');
+    const [updateAction, setUpdateAction] = useState(false);
+    const navigate = useNavigate();
+    const classes = useStyle();
 
     // @@ ---- checks if user is authenticated or not
     useEffect(() => {
@@ -35,10 +37,12 @@ const Home = (props) => {
         if (!isAuth) {
             return navigate('/signin')
         }
+        // @@ ---- IF Token exists Then Verify if it is not expired
         axios.post('http://localhost:8080/api/auth', { token: isAuth })
             .then(result => {
                 setSpinner(false);
                 if (!result.data.isAuth) {
+                    // @@ ---- if Token is expired then redirect to sign in page
                     return navigate('/signin');
                 }
             })
@@ -49,18 +53,6 @@ const Home = (props) => {
         // @@ ---- set that user is Authenticatd
         setIsAuthenticated(true);
     }, [componentRefresh]);
-
-
-    // @@ ---- to show the last part of the messages box
-    const refreshMessages = () => {
-        setInterval(() => {
-            // Get Element
-            const paperDiv = document.getElementById('paperDiv');
-            paperDiv.scrollTop = paperDiv.scrollHeight;
-        }, 2000);
-    };
-
-
 
 
     // @@ ---- Dispatch Redux
@@ -76,11 +68,6 @@ const Home = (props) => {
         }
         // @@ ---- Dispatch Message From State of Redux
         dispatch(messagesAction());
-        // @@ ---- shows The Last Part Of The Box
-        // @@ ---- to Prevent The Error When Every time Calling the Functions
-        if (isAuthenticated) {
-            refreshMessages();
-        }
     }, [req]);
 
     // @@ Get Array Of Messages From State Of Redux
@@ -104,6 +91,7 @@ const Home = (props) => {
     // @@ ---- If User Log outs from our page
     const logout = () => {
         localStorage.clear();
+        setIsAuthenticated(false);
         setComponentRefresh(1);
     }
 
@@ -123,6 +111,7 @@ const Home = (props) => {
                 userImageUrl: user.user.imageUrl,
                 userName: user.user.name + " " + user.user.lastName,
             }
+
             // @@ ---- Input Field Of Form
             setNewMessage('');
             // @@ ---- Send The New Message To The Backend 
@@ -130,6 +119,7 @@ const Home = (props) => {
                 const result = await axios.post('http://localhost:8080/api/newmessage', newUserMessage);
                 // @@ ---- Get New Array of Messages From Backend
                 setReq(1);
+                setUpdateAction(false);
             } catch (error) {
                 // @@ ---- Show Error If Exists
                 setSpinner(false);
@@ -143,14 +133,65 @@ const Home = (props) => {
         }
     }
 
+    // @@ ---- Deleting User Message
+    const deleteMessage = async (_id) => {
+        axios.post('http://localhost:8080/api/message/delete', {
+            _id
+        }).then(response => {
+            // @@ ---- For page refreshing
+            if (req === 0) {
+                setReq(1);
+            } else if (req === 1) {
+                setReq(0);
+            }
+        })
+            .catch(error => console.log(error));
+    }
+
+    // @@ ---- when user clicks on the update Message icon 
+    const updateMessage = (message) => {
+        // @@ ---- set Message Value in the Input Box
+        setUpdateAction(true);
+        setUpdateValue(message);
+        setNewMessage(message.message);
+    }
+
+    // @@ ---- On submition of the updateded Message form
+    const updateMessageHandler = () => {
+        updateValue.message = newMessage;
+        axios.post('http://localhost:8080/api/message/update', updateValue)
+            .then(result => {
+                // @@ ---- OFF the Update Mode
+                setUpdateAction(false);
+                setUpdateValue('');
+                setNewMessage('');
+                // @@ ---- For Page Refreshing
+                if (req === 0) {
+                    setReq(1);
+                } else if (req === 1) {
+                    setReq(0);
+                }
+            }).catch(error => { });
+    }
+
+    // @@ ---- Handel New Message Value
+    const inputValueHander = (event) => {
+        setNewMessage(event.target.value);
+    }
 
 
     // @@ ---- Convert Array Of Messages To JSX
     const allMessages = messages.map(ch => {
         return (
-            <List message={ch} key={ch._id} />
+            <List
+                message={ch}
+                key={ch._id}
+                deleteMessage={deleteMessage}
+                updateMessage={updateMessage}
+            />
         )
     });
+
 
     return (
         <React.Fragment>
@@ -175,15 +216,19 @@ const Home = (props) => {
                             <div id='paperDiv' className={classes.messageDivOfHome}>
                                 {allMessages}
                             </div>
-                            <form onSubmit={onSubmitHandler} >
+                            <div>
                                 <input
                                     placeholder='Enter your message:'
                                     className={classes.inputOfHome}
                                     value={newMessage}
-                                    onChange={event => setNewMessage(event.target.value)}
+                                    onChange={event => inputValueHander(event)}
                                 />
-                                <button className={classes.buttonOfHome}>Submit</button>
-                            </form>
+                                <button
+                                    className={classes.buttonOfHome}
+                                    onClick={updateAction ? updateMessageHandler : onSubmitHandler}>
+                                    {updateAction ? "Update" : "Submit"}
+                                </button>
+                            </div>
                         </Paper>
                     </Grid>
                 </Grid>

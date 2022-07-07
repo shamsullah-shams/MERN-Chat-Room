@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Signup from './Signup/Signup';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from './NotFound';
 import Signin from './Signin/Signin';
 import Home from "./Home/Home";
+
+
+
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>

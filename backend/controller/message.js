@@ -45,3 +45,52 @@ exports.createMessage = async (req, res, next) => {
     }
 }
 
+// @@ function for deleting a Message 
+exports.deleteMessage = async (req, res, next) => {
+    const validationError = validationResult(req);
+    let error = '';
+    // @@ ---- checking validation errors
+    if (!validationError.isEmpty()) {
+        let counter = 0;
+        validationError.array().filter(vE => {
+            counter++;
+            error += counter + ":- " + vE.msg + "  "
+        })
+        // @@ ---- validation Error
+        return res.status(422).send({ message: error });
+    }
+    const { _id } = req.body;
+    try {
+        const result = await Message.findOneAndDelete({ _id });
+        // @@ ---- informing all connected users
+        io.getIO().emit('messages', { action: 'newmessage', message: result })
+        res.status(200).send({ message: "Deleted" });
+    } catch (error) {
+        return res.status(500).send({ message: "Server Error" });
+    }
+}
+
+// @@ ---- function for updating a message
+exports.updateMessage = async (req, res, next) => {
+    const validationError = validationResult(req);
+    let error = '';
+    // @@ ---- checking validation errors
+    if (!validationError.isEmpty()) {
+        let counter = 0;
+        validationError.array().filter(vE => {
+            counter++;
+            error += counter + ":- " + vE.msg + "  "
+        })
+        // @@ ---- validation Error
+        return res.status(422).send({ message: error });
+    }
+    const { _id, message } = req.body;
+    try {
+        const result = await Message.findOneAndUpdate({ _id: _id }, { message: message });
+        // @@ ---- informing all connected users
+        io.getIO().emit('messages', { action: 'newmessage', message: result })
+        res.status(200).send({ message: "Updatad" });
+    } catch (error) {
+        return res.status(500).send({ message: "Server Error" });
+    }
+}
