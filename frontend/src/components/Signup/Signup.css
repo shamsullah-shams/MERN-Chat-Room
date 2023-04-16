@@ -1,0 +1,11 @@
+.Error {
+    color: red;
+}
+
+.Hide {
+    display: none;
+}
+
+.Show {
+    display: inline-block;
+}
