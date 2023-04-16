@@ -1,35 +1,52 @@
 import React from 'react';
 import ListSubheader from '@mui/material/ListSubheader';
-import { Card, Avatar, CardHeader } from "@mui/material";
+import { Avatar, CardHeader } from "@mui/material";
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
+import SingleUser from '../components/UI/SingleUser';
 
-const singleUser = {
-    name: "shamsullah",
-    createdAt: "2022-12-12"
-}
 
+const arr = [
+    {
+        name: "shamsullah",
+        createdAt: "2022-12-12"
+    },
+    {
+        name: "Naqib",
+        createdAt: "2022-12-12"
+    },
+    {
+        name: "Jalil",
+        createdAt: "2022-12-12"
+    },
+    {
+        name: "Janan",
+        createdAt: "2022-12-12"
+    },
+    {
+        name: "Naqibullah",
+        createdAt: "2022-12-12"
+    },
+    {
+        name: "Khan Muhammad",
+        createdAt: "2022-12-12"
+    },
+
+]
 const Users = () => {
     return (
         <React.Fragment>
-
             <List component="nav" style={{ scrollbarColor: true }}>
                 <ListSubheader component="div" inset>
                     Users
                 </ListSubheader>
-                <Card>
-                    <CardHeader
-                        avatar={(
-                            <Avatar
-                                src={`http://localhost:8080/${singleUser.imageUrl}`}
-                            />
-                        )
-                        }
-                        title={singleUser.name}
-                        subheader={singleUser.createdAt}
-                    />
-                </Card>
-                <Divider sx={{ my: 1 }} />
+                {
+                    arr.map((u, id) => (
+                        <SingleUser
+                            key={id}
+                            user={u}
+                        />
+                    ))
+                }
             </List>
         </React.Fragment>
     )

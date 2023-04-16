@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useContext } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -19,19 +19,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Users from './Users';
 import Chats from './Chats';
 import Form from '../components/Form/Form';
+import SingleUser from '../components/UI/SingleUser';
+import UserContext from '../context/UserProvider';
+import Text from '@mui/material/Dialog'
 
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const drawerWidth = 240;
 
@@ -82,7 +73,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = useState(true);
+    const { user } = useContext(UserContext);
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -116,7 +108,12 @@ function DashboardContent() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            Dashboard
+                            {
+                                user ?
+                                    <SingleUser
+                                        user={user}
+                                    /> : <Box>Chat Application</Box>
+                            }
                         </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">

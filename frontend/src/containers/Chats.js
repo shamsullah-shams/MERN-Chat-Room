@@ -1,4 +1,5 @@
 import React from 'react';
+import './Container.css';
 
 
 
@@ -6,9 +7,9 @@ import React from 'react';
 
 const Chats = () => {
     return (
-        <React.Fragment>
+        <div className='Chats'>
             <h1>Recent Chats</h1>
-        </React.Fragment>
+        </div>
     );
 }
 
