@@ -9,10 +9,8 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -21,7 +19,6 @@ import Chats from './Chats';
 import Form from '../components/Form/Form';
 import SingleUser from '../components/UI/SingleUser';
 import UserContext from '../context/UserProvider';
-import Text from '@mui/material/Dialog'
 
 
 const drawerWidth = 240;
@@ -151,14 +148,17 @@ function DashboardContent() {
                     }}
                 >
                     <Toolbar />
-                    <Grid xs={12} flex={1} overflow="hidden" >
-                        <Grid xs={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                <Chats />
-                            </Paper>
+                    {
+                        user &&
+                        <Grid xs={12} flex={1} overflow="hidden" >
+                            <Grid xs={12}>
+                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                                    <Chats />
+                                </Paper>
+                            </Grid>
+                            <Form />
                         </Grid>
-                        <Form />
-                    </Grid>
+                    }
                 </Box>
             </Box>
         </ThemeProvider>
