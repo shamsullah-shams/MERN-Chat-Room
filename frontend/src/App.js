@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
-import Signup from './Signup/Signup';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NotFound from './NotFound';
-import Signin from './Signin/Signin';
-import Home from "./Home/Home";
+import React, { Suspense, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Context from "./Cotext";
+import Dashboard from './New/Dashborad';
 
 
 
@@ -12,12 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<>
-          <Home />
-        </>} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path='/signin' element={<Signin />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
