@@ -5,7 +5,6 @@ import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -17,9 +16,8 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems } from './ListItems';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import Users from './Users';
+import Chats from './Chats';
 import Form from '../components/Form/Form';
 
 function Copyright(props) {
@@ -141,10 +139,7 @@ function DashboardContent() {
                         </IconButton>
                     </Toolbar>
                     <Divider />
-                    <List component="nav" style={{ scrollbarColor: true }}>
-                        {mainListItems}
-                        <Divider sx={{ my: 1 }} />
-                    </List>
+                    <Users />
                 </Drawer>
                 <Box
                     component="main"
@@ -162,7 +157,7 @@ function DashboardContent() {
                     <Grid xs={12} flex={1} overflow="hidden" >
                         <Grid xs={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                <Orders />
+                                <Chats />
                             </Paper>
                         </Grid>
                         <Form />

@@ -1,7 +1,6 @@
-import React, { Suspense, useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Context from "./Cotext";
-import Dashboard from './New/Dashborad';
+import Dashboard from './containers/Dashborad';
 
 
 
