@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"
 import Spinner from "../UI/Spinner/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "../../api/axios";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "../Signup/Signup.css";
 import checkValidity from "../../checkValidity";
 import DescriptionAlerts from "../UI/Alert";
+import useAuth from "../../hooks/useAuth";
 
 
 const theme = createTheme();
@@ -28,9 +29,14 @@ const Signin = () => {
     const [error, setError] = useState(false);
     const [spinner, setSpinner] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    // get set method from custom auth Hook
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     // @@ ---- Handling User
     const onChangeHandler = event => {
@@ -91,19 +97,16 @@ const Signin = () => {
             // @@ ---- send the user information to the backend
             const result = await axios.post('/api/user/login', user);
             // @@ ---- store user information in local storage
-            // localStorage.setItem('user', JSON.stringify(result.data));
-            // localStorage.setItem('token', result.data.token);
-
-            console.log(result.data.token);
-
             setSpinner(false);
-            // @@ ---- redirect to home screen
-            if (result.status === 200) {
-                navigate('/');
-            }
+            console.log(result.data)
+            const accessToken = result.data.token;
+            const backendUser = result.data.user;
+            setAuth({ user: backendUser, accessToken })
+            navigate('/')
         } catch (error) {
+            console.log(error)
             setSpinner(false);
-            setErrorMessage(error.response.data.message);
+            setErrorMessage(error?.response?.data?.message);
             setError(true);
             setTimeout(() => {
                 setError(false);
