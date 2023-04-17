@@ -1,14 +1,21 @@
 import React, { useContext } from 'react';
 import { Avatar, CardHeader } from "@mui/material";
+
 import UserContext from '../../context/UserProvider';
 
+
+
 const SingleUser = props => {
-    const { setUser } = useContext(UserContext);
+    const { setSecondUser } = useContext(UserContext);
+
 
     // set the user in the header bar
-    const clickHandler = (event) => {
-        setUser(props.user);
+    const clickHandler = async () => {
+        setSecondUser(props.user);
     }
+
+
+
     return (
         <React.Fragment>
             <CardHeader

@@ -4,11 +4,14 @@ const { body } = require('express-validator');
 const router = express.Router();
 
 // @@ ---- route for return all users to the client
-router.get('/api/users', authController.getAllUsers);
-// @@ ---- route for checking user authentications
-router.post('/api/auth', authController.isAuth);
+router.get('', authController.getAllUsers);
+
+// // @@ ---- route for checking user authentications
+// router.post('/api/auth', authController.isAuth);
+
+
 // @@ ---- route for signing users
-router.post('/api/user/login',
+router.post('/login',
     [
         body('email')
             .trim()

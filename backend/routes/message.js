@@ -1,17 +1,32 @@
 const express = require('express');
-const messageController = require('../controller/message');
+const chatController = require('../controller/chats');
 const { body } = require('express-validator');
 const router = express.Router();
 
-// @@ ---- route for return all messages to the users
-router.get('/api/getmessages', messageController.getAllMessages);
+// router.post('/', chatController.getAllMessages);
+
+
 // @@ ---- route for deleting a message 
 router.post('/api/message/delete', [
     body('_id')
         .trim()
         .isMongoId()
         .withMessage('MongoDB Id is Required')
-], messageController.deleteMessage)
+], chatController.deleteMessage)
+
+
+
+// @@ ---- route for return all messages to the users
+router.post('/', [
+    body('from')
+        .trim()
+        .isMongoId()
+        .withMessage('From User Id is Required'),
+    body('to')
+        .trim()
+        .isMongoId()
+        .withMessage('To User Id is Required'),
+], chatController.GetAllChats)
 
 // @@ ---- route for updating a message 
 router.post('/api/message/update',
@@ -35,15 +50,19 @@ router.post('/api/message/update',
             .exists()
             .withMessage("User Name should be provided"),
 
-    ], messageController.updateMessage);
+    ], chatController.updateMessage);
 
 
 
 
 // @@ ---- route for creating new message
-router.post('/api/newmessage',
+router.post('/create',
     [
-        body('userId')
+        body('from')
+            .trim()
+            .isMongoId()
+            .withMessage("Please Enter a mongodb id"),
+        body('to')
             .trim()
             .isMongoId()
             .withMessage("Please Enter a mongodb id"),
@@ -51,14 +70,8 @@ router.post('/api/newmessage',
             .trim()
             .exists()
             .withMessage("please Enter a message"),
-        body('userImageUrl')
-            .exists()
-            .withMessage("User Profile not found"),
-        body('userName')
-            .exists()
-            .withMessage("User Name should be provided"),
 
-    ], messageController.createMessage);
+    ], chatController.createChat);
 
 
 

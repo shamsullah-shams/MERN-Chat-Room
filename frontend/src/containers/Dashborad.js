@@ -19,6 +19,7 @@ import Chats from './Chats';
 import Form from '../components/Form/Form';
 import SingleUser from '../components/UI/SingleUser';
 import UserContext from '../context/UserProvider';
+import useAuth from '../hooks/useAuth';
 
 
 const drawerWidth = 240;
@@ -70,8 +71,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-    const [open, setOpen] = useState(true);
-    const { user } = useContext(UserContext);
+    const [open, setOpen] = useState(false);
+    const { secondUser } = useContext(UserContext);
+    const { auth } = useAuth();
+    const user = auth?.user;
+    // remove createAt date from user
+    user.createdAt = null;
+    const copyObject = Object.assign({}, secondUser);
+    copyObject.createdAt = null;
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -106,17 +113,19 @@ function DashboardContent() {
                             sx={{ flexGrow: 1 }}
                         >
                             {
-                                user ?
+                                secondUser ?
                                     <SingleUser
-                                        user={user}
+                                        user={copyObject}
                                     /> : <Box>Chat Application</Box>
                             }
                         </Typography>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+
+                        {
+                            user ?
+                                <SingleUser
+                                    user={user}
+                                /> : ''
+                        }
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
@@ -149,9 +158,9 @@ function DashboardContent() {
                 >
                     <Toolbar />
                     {
-                        user &&
-                        <Grid xs={12} flex={1} overflow="hidden" >
-                            <Grid xs={12}>
+                        secondUser &&
+                        <Grid item xs={12} flex={1} overflow="hidden" >
+                            <Grid item xs={12}>
                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                                     <Chats />
                                 </Paper>

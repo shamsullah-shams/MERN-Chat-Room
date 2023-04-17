@@ -16,24 +16,24 @@ exports.getAllUsers = async (req, res, next) => {
 }
 
 
-// @@ ---- checks if user is Authorized
-exports.isAuth = (req, res, next) => {
-    const { token } = req.body;
-    if (!token) {
-        return res.status(422).send({ message: "Not Authorized", isAuth: false });
-    }
-    let decodedToken
-    // @@ ---- checking jsonwebtoken 
-    try {
-        decodedToken = jwt.verify(token, process.env.SECRET);
-    } catch (error) {
-        return res.status(500).send({ message: "server error try again", isAuth: false });
-    }
-    if (!decodedToken) {
-        return res.status(422).send({ message: 'Not Authorized', isAuth: false });
-    }
-    return res.status(200).send({ message: "user is authorized", isAuth: true });
-}
+// // @@ ---- checks if user is Authorized
+// exports.isAuth = (req, res, next) => {
+//     const { token } = req.body;
+//     if (!token) {
+//         return res.status(422).send({ message: "Not Authorized", isAuth: false });
+//     }
+//     let decodedToken
+//     // @@ ---- checking jsonwebtoken 
+//     try {
+//         decodedToken = jwt.verify(token, process.env.SECRET);
+//     } catch (error) {
+//         return res.status(500).send({ message: "server error try again", isAuth: false });
+//     }
+//     if (!decodedToken) {
+//         return res.status(422).send({ message: 'Not Authorized', isAuth: false });
+//     }
+//     return res.status(200).send({ message: "user is authorized", isAuth: true });
+// }
 
 
 

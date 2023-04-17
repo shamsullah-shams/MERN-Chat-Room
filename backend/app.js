@@ -2,7 +2,7 @@ const express = require('express');
 const { body } = require('express-validator');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const messageRoutes = require('./routes/message');
+const chatRoutes = require('./routes/message');
 const authRoutes = require('./routes/auth');
 var cors = require('cors');
 const path = require('path')
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // @@ ---- To serve the public folder statically
-app.use(express.static(path.join(__dirname, 'public', 'build')));
+// app.use(express.static(path.join(__dirname, 'public', 'build')));
 // @@ ---- To serve the images folder statically
 app.use('/backend/images', express.static(path.join(__dirname, 'images')));
 
@@ -100,13 +100,13 @@ app.post('/api/signup',
 
 
 // @@ ---- routes for messages
-app.use(messageRoutes);
+app.use('/api/chats', chatRoutes);
 // @@ ---- routes for users
-app.use(authRoutes);
+app.use('/api/users', authRoutes);
 // @@ ---- route for serving the react.js build folder
-app.use('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'));
-})
+// app.use('/', (req, res, next) => {
+//     res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'));
+// })
 
 // @@ ---- mongodb connection
 mongoose.connect('mongodb://127.0.0.1:27017/chatApp', (error) => {

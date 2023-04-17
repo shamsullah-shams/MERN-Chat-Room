@@ -13,10 +13,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import "../Signup/Signup.css";
 import checkValidity from "../../checkValidity";
 import DescriptionAlerts from "../UI/Alert";
 import useAuth from "../../hooks/useAuth";
+import "../Signup/Signup.css";
 
 
 const theme = createTheme();
@@ -33,7 +33,8 @@ const Signin = () => {
     const [password, setPassword] = useState('');
 
     // get set method from custom auth Hook
-    const { setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -95,16 +96,15 @@ const Signin = () => {
         }
         try {
             // @@ ---- send the user information to the backend
-            const result = await axios.post('/api/user/login', user);
+            const result = await axios.post('/api/users/login', user);
             // @@ ---- store user information in local storage
             setSpinner(false);
-            console.log(result.data)
             const accessToken = result.data.token;
             const backendUser = result.data.user;
+
             setAuth({ user: backendUser, accessToken })
             navigate('/')
         } catch (error) {
-            console.log(error)
             setSpinner(false);
             setErrorMessage(error?.response?.data?.message);
             setError(true);
