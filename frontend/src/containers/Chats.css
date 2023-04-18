@@ -1,7 +1,7 @@
 .To {
     padding: 10px;
-    background-color: rgb(148, 231, 148);
-    color: green;
+    background-color: rgba(122, 253, 122, 0.3);
+    color: white;
     margin: 10px;
     width: 140px;
     border-radius: 5px;
@@ -13,7 +13,7 @@
 
 .From {
     padding: 10px;
-    background-color: grey;
+    background-color: rgba(112, 122, 112, 0.3);
     color: white;
     margin: 10px;
     width: 140px;
@@ -21,4 +21,8 @@
     display: -moz-box;
     display: -webkit-box;
     display: box;
+}
+
+.shouldBeScrolled {
+    overflow-y: auto;
 }

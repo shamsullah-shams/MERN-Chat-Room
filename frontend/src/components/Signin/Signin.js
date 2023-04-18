@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"
 import Spinner from "../UI/Spinner/Spinner";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -56,10 +56,9 @@ const Signin = () => {
     const [password, setPassword] = useState('');
 
     // get set method from custom auth Hook
-    const { auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     // @@ ---- Handling User
     const onChangeHandler = event => {

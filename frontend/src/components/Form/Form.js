@@ -8,15 +8,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Form.css';
 
 
+const InputStyle = {
+    backgroundColor: "#494949",
+    color: '#fff',
+    WebkitTextFillColor: '#fff',
+    display: 'flex',
+    flexDirection: 'column'
+}
 
 const Form = () => {
     const [inputValue, setInputValue] = useState('');
     const { auth } = useAuth();
     const { secondUser } = useContext(UserContext);
-
-
-
-
 
     const changeHandler = event => {
         setInputValue(event.target.value);
@@ -49,10 +52,11 @@ const Form = () => {
             />
             <form className="Form" onSubmit={onSubmitHandler}>
                 <TextField
-                    sx={{ display: 'flex', flexDirection: 'column' }}
-                    placeholder="Enter New Message"
+                    sx={InputStyle}
+                    placeholder="Type New Message"
                     onChange={changeHandler}
                     value={inputValue}
+                    autoComplete="off"
                 />
             </form>
         </React.Fragment>

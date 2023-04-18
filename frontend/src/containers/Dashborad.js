@@ -8,12 +8,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import Users from './Users';
 import Chats from './Chats';
 import Form from '../components/Form/Form';
@@ -159,7 +155,7 @@ function DashboardContent() {
                     component="main"
                     sx={{
                         backgroundColor: (theme) =>
-                            theme.palette.mode === 'light'
+                            theme.palette.mode === 'dark'
                                 ? theme.palette.grey[100]
                                 : theme.palette.grey[900],
                         flexGrow: 1,
