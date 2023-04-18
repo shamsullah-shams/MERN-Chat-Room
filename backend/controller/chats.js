@@ -3,15 +3,6 @@ const Chat = require('../model/Chat');
 const io = require('../socket');
 
 
-// // @@ ---- funciton that returns all messages to the client
-// exports.getAllMessages = async (req, res, next) => {
-//     try {
-//         const allMessages = await Message.find();
-//         res.send([...allMessages]);
-//     } catch (error) {
-//         return res.status(500).send({ message: "Server Error" });
-//     }
-// }
 
 // @@ ---- function that creates a new message related to a special client
 exports.createChat = async (req, res, next) => {
@@ -123,7 +114,6 @@ exports.GetAllChats = async (req, res, next) => {
 
         res.status(200).send(result);
     } catch (error) {
-        console.log(error);
         return res.status(500).send({ message: "Server Error" });
     }
 }

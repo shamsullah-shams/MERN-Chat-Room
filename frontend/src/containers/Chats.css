@@ -1,0 +1,24 @@
+.To {
+    padding: 10px;
+    background-color: rgb(148, 231, 148);
+    color: green;
+    margin: 10px;
+    width: 140px;
+    border-radius: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+
+}
+
+.From {
+    padding: 10px;
+    background-color: grey;
+    color: white;
+    margin: 10px;
+    width: 140px;
+    border-radius: 5px;
+    display: -moz-box;
+    display: -webkit-box;
+    display: box;
+}

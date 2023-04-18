@@ -4,14 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthProvider';
-import { ChatProvider } from './context/ChatProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthProvider>
-    <ChatProvider>
-      <App />
-    </ChatProvider>
+    <App />
   </AuthProvider>
 );
 

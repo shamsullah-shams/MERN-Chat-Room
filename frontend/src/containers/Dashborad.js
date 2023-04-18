@@ -68,7 +68,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+    palette: {
+        primary: {
+            main: '#494949',
+        },
+    }
+});
 
 function DashboardContent() {
     const [open, setOpen] = useState(false);
@@ -128,22 +134,24 @@ function DashboardContent() {
                         }
                     </Toolbar>
                 </AppBar>
-                <Drawer variant="permanent" open={open}>
-                    <Toolbar
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                            px: [1],
-                        }}
-                    >
-                        <IconButton onClick={toggleDrawer}>
-                            <ChevronLeftIcon />
-                        </IconButton>
-                    </Toolbar>
-                    <Divider />
-                    <Users />
-                </Drawer>
+                <ThemeProvider theme={mdTheme}>
+                    <Drawer variant="permanent" open={open} color='primary'>
+                        <Toolbar
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                px: [1],
+                            }}
+                        >
+                            <IconButton onClick={toggleDrawer}>
+                                <ChevronLeftIcon />
+                            </IconButton>
+                        </Toolbar>
+                        <Divider />
+                        <Users />
+                    </Drawer>
+                </ThemeProvider>
                 <Box
                     component="main"
                     sx={{
@@ -159,14 +167,10 @@ function DashboardContent() {
                     <Toolbar />
                     {
                         secondUser &&
-                        <Grid item xs={12} flex={1} overflow="hidden" >
-                            <Grid item xs={12}>
-                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                    <Chats />
-                                </Paper>
-                            </Grid>
+                        <React.Fragment>
+                            <Chats />
                             <Form />
-                        </Grid>
+                        </React.Fragment>
                     }
                 </Box>
             </Box>
