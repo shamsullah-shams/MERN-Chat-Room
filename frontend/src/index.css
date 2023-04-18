@@ -22,3 +22,17 @@ svg,
 button {
   cursor: pointer;
 }
+
+.MuiInputBase-input {
+  background: '#707070';
+  color: '#fff';
+}
+
+.MuiInputBase-input:focus {
+  background-color: '#707070';
+}
+
+.MuiInputBase-root {
+  background-color: '#707070';
+  color: '#fff';
+}

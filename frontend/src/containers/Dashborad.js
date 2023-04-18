@@ -134,24 +134,27 @@ function DashboardContent() {
                         }
                     </Toolbar>
                 </AppBar>
-                <ThemeProvider theme={mdTheme}>
-                    <Drawer variant="permanent" open={open} color='primary'>
-                        <Toolbar
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'flex-end',
-                                px: [1],
-                            }}
-                        >
-                            <IconButton onClick={toggleDrawer}>
-                                <ChevronLeftIcon />
-                            </IconButton>
-                        </Toolbar>
-                        <Divider />
-                        <Users />
-                    </Drawer>
-                </ThemeProvider>
+                <Drawer variant="permanent" open={open} PaperProps={{
+                    sx: {
+                        color: "#fff",
+                        backgroundColor: "#646464"
+                    }
+                }}>
+                    <Toolbar
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            px: [1],
+                        }}
+                    >
+                        <IconButton onClick={toggleDrawer}>
+                            <ChevronLeftIcon sx={{ bgcolor: '#fff' }} style={{ borderRadius: 20 }} />
+                        </IconButton>
+                    </Toolbar>
+                    <Divider sx={{ bgcolor: "#fff" }} />
+                    <Users />
+                </Drawer>
                 <Box
                     component="main"
                     sx={{

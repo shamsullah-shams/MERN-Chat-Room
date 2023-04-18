@@ -56,9 +56,7 @@ const Users = () => {
                 autoClose={5000}
             />
             <List component="nav" style={{ scrollbarColor: true }}>
-                <ListSubheader component="div" inset>
-                    Users
-                </ListSubheader>
+
                 {
                     usersArray.map((u, id) => (
                         <SingleUser

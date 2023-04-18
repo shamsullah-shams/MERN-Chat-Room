@@ -26,6 +26,7 @@ const SingleUser = props => {
                     />
                 )
                 }
+                subheaderTypographyProps={{ color: 'white' }}
                 title={props.user.name}
                 subheader={props.user.createdAt}
             />

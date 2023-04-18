@@ -18,7 +18,31 @@ import checkValidity from "../../checkValidity";
 import DescriptionAlerts from "../UI/Alert";
 
 
-const theme = createTheme();
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#494949',
+        },
+        background: {
+            default: "#707070"
+        }
+    }
+});
+
+const InputStyle = {
+    backgroundColor: "#707070",
+    borderRadius: 2,
+    color: '#707070',
+    WebkitTextFillColor: '#fff',
+}
+
+const containerStyle = {
+    backgroundColor: "#000",
+    borderRadius: 2,
+    paddingTop: 0.01,
+    marginTop: 5,
+    color: '#fff'
+}
 
 const Signup = () => {
 
@@ -118,7 +142,7 @@ const Signup = () => {
     return (
 
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" sx={containerStyle}>
                 <CssBaseline />
                 <Box
                     sx={{
@@ -128,9 +152,6 @@ const Signup = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
@@ -145,13 +166,13 @@ const Signup = () => {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     onChange={onChangeHandler}
-                                    autoComplete="given-name"
                                     name="name"
                                     required
                                     fullWidth
                                     id="name"
+                                    autoComplete="off"
                                     label="First Name"
-                                    autoFocus
+                                    sx={InputStyle}
                                 />
                                 {
                                     showErrors.name && <small className="Error">Name is Required</small>
@@ -161,13 +182,13 @@ const Signup = () => {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     onChange={onChangeHandler}
-                                    autoComplete="lastName"
                                     name="lastName"
                                     required
                                     fullWidth
                                     id="lastName"
                                     label="Last Name"
-                                    autoFocus
+                                    autoComplete="off"
+                                    sx={InputStyle}
                                 />
                                 {
                                     showErrors.lastName && <small className="Error">Last Name is Required</small>
@@ -182,7 +203,8 @@ const Signup = () => {
                                     id="email"
                                     label="Email Address"
                                     name="email"
-                                    autoComplete="email"
+                                    autoComplete="false"
+                                    sx={InputStyle}
                                 />
                                 {
                                     showErrors.email && <small className="Error">Email is Required</small>
@@ -198,7 +220,8 @@ const Signup = () => {
                                     label="Password"
                                     type="password"
                                     id="password"
-                                    autoComplete="new-password"
+                                    autoComplete="off"
+                                    sx={InputStyle}
                                 />
                                 {
                                     showErrors.password && <small className="Error">password must be more than 8 character</small>
@@ -206,6 +229,7 @@ const Signup = () => {
 
                             </Grid>
                             <Grid item xs={12}>
+                                <label>choose image</label>
                                 <TextField
                                     onChange={event => setImage(event.target.files[0])}
                                     fullWidth
@@ -213,6 +237,8 @@ const Signup = () => {
                                     label="Image"
                                     type="file"
                                     id="image"
+                                    autoComplete='off'
+                                    sx={InputStyle}
                                 />
                             </Grid>
                         </Grid>

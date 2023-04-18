@@ -3,13 +3,11 @@ import { Link } from "react-router-dom"
 import Spinner from "../UI/Spinner/Spinner";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "../../api/axios";
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -19,7 +17,32 @@ import useAuth from "../../hooks/useAuth";
 import "../Signup/Signup.css";
 
 
-const theme = createTheme();
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#494949',
+        },
+        background: {
+            default: "#707070"
+        }
+    }
+});
+
+const InputStyle = {
+    backgroundColor: "#707070",
+    borderRadius: 2,
+    color: '#707070',
+    WebkitTextFillColor: '#fff',
+}
+
+const containerStyle = {
+    backgroundColor: "#000",
+    borderRadius: 2,
+    paddingTop: 0.01,
+    marginTop: 5,
+    color: '#fff'
+}
+
 
 const Signin = () => {
 
@@ -37,7 +60,6 @@ const Signin = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
 
     // @@ ---- Handling User
     const onChangeHandler = event => {
@@ -116,11 +138,11 @@ const Signin = () => {
     }
 
 
-
     return (
 
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" sx={containerStyle}
+            >
                 <CssBaseline />
                 <Box
                     sx={{
@@ -149,7 +171,8 @@ const Signin = () => {
                                     id="email"
                                     label="Email Address"
                                     name="email"
-                                    autoComplete="email"
+                                    autoComplete="off"
+                                    sx={InputStyle}
                                 />
                                 {
                                     showErrors.email && <small className="Error">Email is Required</small>
@@ -166,6 +189,7 @@ const Signin = () => {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
+                                    sx={InputStyle}
                                 />
                                 {
                                     showErrors.password && <small className="Error">password must be more than 8 character</small>
