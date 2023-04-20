@@ -8,10 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./Chats.css"
 
 const myFunction = () => {
-    console.log('urn')
     const selectedDiv = document.getElementById('shouldBeScrolled');
     selectedDiv.scrollTop = selectedDiv.scrollHeight;
-    // selectedDiv.scrollIntoView();
 }
 
 const Chats = () => {
