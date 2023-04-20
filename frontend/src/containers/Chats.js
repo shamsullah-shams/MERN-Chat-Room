@@ -7,6 +7,12 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./Chats.css"
 
+const myFunction = () => {
+    console.log('urn')
+    const selectedDiv = document.getElementById('shouldBeScrolled');
+    selectedDiv.scrollTop = selectedDiv.scrollHeight;
+    // selectedDiv.scrollIntoView();
+}
 
 const Chats = () => {
 
@@ -36,15 +42,16 @@ const Chats = () => {
                             }
                         }
                     })
-                    setChats(newArray);
+                    setChats([...newArray]);
                 } catch (error) {
                     toast.error(error.message);
                 }
             }
         }
         loadChats();
-        const selectedDiv = document.getElementById('shouldBeScrolled');
-        selectedDiv.scrollTop = selectedDiv.scrollHeight
+        setTimeout(() => {
+            myFunction();
+        }, 100)
     }, [secondUser, req]);
 
     useEffect(() => {
@@ -56,24 +63,23 @@ const Chats = () => {
                 setReq(newVar);
             }
         })
-    }, []);
+    }, [req]);
 
 
     return (
-        <div className='Chats'>
+        <React.Fragment>
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
             />
-            <div id='shouldBeScrolled'>
+            <div id='shouldBeScrolled' style={{ paddingBottom: 80, overflow: 'auto', paddingTop: 20, height: '100%' }}>
                 {
                     chats.map(m => (
                         <div key={m._id} className={m.className}>{m.message}</div>
                     ))
                 }
             </div>
-
-        </div>
+        </React.Fragment>
     );
 }
 

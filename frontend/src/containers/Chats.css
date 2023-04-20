@@ -1,28 +1,92 @@
+.shouldBeScrolled {
+    overflow-y: scroll !important;
+    height: 90% !important;
+    padding-top: 150px !important;
+    padding-bottom: 2000px !important;
+    border: 30px solid red !important;
+    display: inline-block;
+    width: 100% !important;
+    overflow: auto !important;
+    padding-top: 1000px !important;
+    background-color: red !important;
+}
+
 .To {
     padding: 10px;
     background-color: rgba(122, 253, 122, 0.3);
     color: white;
     margin: 10px;
-    width: 140px;
+    width: 180px;
     border-radius: 5px;
     display: block;
     margin-left: auto;
     margin-right: 10px;
-
+    text-align: justify;
 }
 
 .From {
     padding: 10px;
-    background-color: rgba(112, 122, 112, 0.3);
+    background-color: rgba(118, 119, 118, 0.3);
     color: white;
     margin: 10px;
-    width: 140px;
+    width: 180px;
     border-radius: 5px;
     display: -moz-box;
     display: -webkit-box;
     display: box;
+    text-align: justify;
 }
 
-.shouldBeScrolled {
-    overflow-y: auto;
+.From,
+.To {
+    border-radius: 20px;
+    position: relative;
+}
+
+.From {
+    float: left;
+    clear: both;
+    border-bottom-right-radius: 0px;
+}
+
+.From::after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    display: block;
+    border-left: 5px solid transparent;
+    border-right: 5px solid rgba(118, 119, 118, 0.3);
+    border-top: 5px solid rgba(118, 119, 118, 0.3);
+    border-bottom: 5px solid transparent;
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+}
+
+.To {
+    float: right;
+    clear: both;
+    border-top-left-radius: 0px;
+}
+
+.To::after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    display: block;
+    border-left: 5px solid rgba(122, 253, 122, 0.3);
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid rgba(122, 253, 122, 0.3);
+    border-top: 5px solid transparent;
+    position: absolute;
+    top: -10px;
+    left: 0;
+}
+
+.To>small,
+.From>small {
+    font-size: 14px;
+    width: 100%;
+    display: block;
+    background-color: blue;
 }
