@@ -50,3 +50,7 @@ button {
   border-radius: 20px;
   left: -10px;
 }
+
+input:focus {
+  background-color: black;
+}
