@@ -2,7 +2,7 @@
 Real time Chat Appplication. 
 using react and node.js
 
-you can click on the [https://chat-app-his3.onrender.com](chat-app.com) to see the react build project serving by Node.js hosted to the claud
+you can click on the [`On Render`](https://chat-app-his3.onrender.com) to see the react build project serving by Node.js hosted to the claud
 
 
 ## module installation
