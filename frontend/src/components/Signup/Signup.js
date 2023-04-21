@@ -159,7 +159,7 @@ const Signup = () => {
                     {
                         spinner && <Spinner />
                     }
-                    <Box component="form" noValidate onSubmit={onSubmitHandler} sx={{ mt: 3 }}>
+                    <Box component="form" autoComplete="off" noValidate onSubmit={onSubmitHandler} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -168,9 +168,15 @@ const Signup = () => {
                                     required
                                     fullWidth
                                     id="name"
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                     label="First Name"
                                     sx={InputStyle}
+                                    inputProps={{
+                                        autocomplete: 'new-password',
+                                        form: {
+                                            autoComplete: 'new-password'
+                                        }
+                                    }}
                                 />
                                 {
                                     showErrors.name && <small className="Error">Name is Required</small>
@@ -185,8 +191,14 @@ const Signup = () => {
                                     fullWidth
                                     id="lastName"
                                     label="Last Name"
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                     sx={InputStyle}
+                                    inputProps={{
+                                        autocomplete: 'new-password',
+                                        form: {
+                                            autoComplete: 'new-password'
+                                        }
+                                    }}
                                 />
                                 {
                                     showErrors.lastName && <small className="Error">Last Name is Required</small>
@@ -201,8 +213,14 @@ const Signup = () => {
                                     id="email"
                                     label="Email Address"
                                     name="email"
-                                    autoComplete="false"
+                                    autoComplete="new-password"
                                     sx={InputStyle}
+                                    inputProps={{
+                                        autocomplete: 'new-password',
+                                        form: {
+                                            autoComplete: 'new-password'
+                                        }
+                                    }}
                                 />
                                 {
                                     showErrors.email && <small className="Error">Email is Required</small>
@@ -218,8 +236,14 @@ const Signup = () => {
                                     label="Password"
                                     type="password"
                                     id="password"
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                     sx={InputStyle}
+                                    inputProps={{
+                                        autocomplete: 'new-password',
+                                        form: {
+                                            autoComplete: 'new-password'
+                                        }
+                                    }}
                                 />
                                 {
                                     showErrors.password && <small className="Error">password must be more than 8 character</small>
@@ -235,8 +259,14 @@ const Signup = () => {
                                     label="Image"
                                     type="file"
                                     id="image"
-                                    autoComplete='off'
+                                    autoComplete='new-password'
                                     sx={InputStyle}
+                                    inputProps={{
+                                        autocomplete: 'new-password',
+                                        form: {
+                                            autoComplete: 'new-password'
+                                        }
+                                    }}
                                 />
                             </Grid>
                         </Grid>
