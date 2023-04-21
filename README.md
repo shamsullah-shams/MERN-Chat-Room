@@ -1,5 +1,8 @@
 # Reat Time Chat Room in MERN
-Real time Chat Appplication. This is a Simple Chat Room Where you can share a message and you can see messages of other people. You can post a new message. As soon as you post a new message that goes to all connected clients and they can see your post. Post will be related to you and Only and Only you can update or delete your Post.
+Real time Chat Appplication. 
+using react and node.js
+
+you can click on the [https://chat-app-his3.onrender.com](chat-app.com) to see the react build project serving by Node.js hosted to the claud
 
 
 ## module installation
